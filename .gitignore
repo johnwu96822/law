@@ -39,5 +39,4 @@ Guardfile
 *~
 *.swp
 db/development.sqlite3.db
-Gemfile.lock
 .git/
