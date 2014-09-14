@@ -1,10 +1,20 @@
 class ArticlesController < ApplicationController
   include Permission
   before_action :authenticate_user!
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
-  before_action only: [:show, :edit, :update, :destroy] do
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :children]
+  before_action only: [:show, :edit, :update, :destroy, :children] do
     owner_and_admin_only(@article)
   end 
+  
+  def children
+    children = @article.children
+    temp = []
+    children.each do |child|
+      temp << {id: child.id, content: child.content,
+          has_children: child.has_children?}
+    end
+    render json: {children: temp}
+  end
 
   # GET /articles
   # GET /articles.json
@@ -20,10 +30,16 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = Article.new
+    @for_select = Article.all.collect{|ar| 
+        ["#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}", 
+        "#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}"]}
   end
 
   # GET /articles/1/edit
   def edit
+    @for_select = Article.where("NOT id = #{@article.id}").all.collect{|ar| 
+        ["#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}", 
+        "#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}"]}
   end
 
   # POST /articles

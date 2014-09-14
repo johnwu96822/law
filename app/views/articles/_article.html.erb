@@ -1,4 +1,14 @@
-<li>
-  <%= article.content %>
+<li id="article_<%= article.id %>">
   <% children = article.children %>
+  <% if children.length > 0 %>
+    <a href="javascript:void(0)" onclick="showChildren(<%= article.id %>)">
+      <span>
+        <i class="icon-plus"></i><%= article.content %>
+      </span>
+    </a>
+  <% else %>
+    <span>
+      <%= article.content %>
+    </span>
+  <% end %>
 </li>

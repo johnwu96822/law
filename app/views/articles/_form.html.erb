@@ -17,9 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :ancestry %><br>
-    <%= f.select :ancestry, Article.where("NOT id = #{@article.id}").all.collect{|ar| 
-        ["#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}", 
-        "#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}"]}, 
+    <%= f.select :ancestry, @for_select, 
         {include_blank: true} %>
   </div>
   <div class="field">
