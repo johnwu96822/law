@@ -47,13 +47,17 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.user_id = current_user.id
-
+    @article.ancestry = nil if @article.ancestry.blank?
     respond_to do |format|
       if @article.save
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
       else
-        format.html { render :new }
+        format.html { 
+          @for_select = Article.all.collect{|ar| 
+            ["#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}", 
+            "#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}"]}
+          render :new }
         format.json { render json: @article.errors, status: :unprocessable_entity }
       end
     end
@@ -62,12 +66,17 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
+    params[:article][:ancestry] = nil if params[:article][:ancestry].blank?
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
       else
-        format.html { render :edit }
+        format.html { 
+          @for_select = Article.where("NOT id = #{@article.id}").all.collect{|ar| 
+            ["#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}", 
+            "#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}"]}
+          render :edit }
         format.json { render json: @article.errors, status: :unprocessable_entity }
       end
     end
