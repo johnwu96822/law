@@ -26,9 +26,17 @@
   top: 16px;
   width: 25px;
 }
+.icon-plus, .icon-minus {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+  float: left;
+  margin: 3px 5px 0 0;
+}
 .icon-plus {
-  background: url("plus.svg") no-repeat;
+  background: url("/images/plus.svg") no-repeat;
 }
 .icon-minus {
-  background: url("minus.svg") no-repeat;
+  background: url("/images/minus.svg") no-repeat;
 }
