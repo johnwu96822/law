@@ -11,6 +11,7 @@ function showChildren(id) {
   } else {
     $('#a_children_' + id).toggle();
   }
+  $('#icon_' + id).toggleClass('icon-plus icon-minus');
 }
 
 function createSubtree(id, data) {
@@ -22,7 +23,7 @@ function createSubtree(id, data) {
         if (article.has_children == true) {
           var link = $('<a>').attr({href: 'javascript:void(0)',
               onclick: 'showChildren(' + article.id + ')'});
-          link.html($('<span>').html('<i class="icon-plus"></i>' + article.content)).appendTo(ele);
+          link.html($('<span>').html('<i id="icon_' + article.id + '" class="icon-plus"></i>' + article.content)).appendTo(ele);
         } else {
           ele.append($('<span>').html(article.content));
         }
