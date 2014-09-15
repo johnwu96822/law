@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :articles do
     member do
       get :children
+      get :all
     end
   end
 

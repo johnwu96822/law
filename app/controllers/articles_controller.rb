@@ -1,10 +1,10 @@
 class ArticlesController < ApplicationController
   include Permission
   before_action :authenticate_user!
-  before_action :set_article, only: [:show, :edit, :update, :destroy, :children]
-  before_action only: [:show, :edit, :update, :destroy, :children] do
-    owner_and_admin_only(@article)
-  end 
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :children, :all]
+  # before_action only: [:show, :edit, :update, :destroy, :children] do
+    # owner_and_admin_only(@article)
+  # end 
   
   def children
     children = @article.children.order("priority ASC")
@@ -26,6 +26,11 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
+  end
+  
+  # GET /articles/1/all
+  def all
+    render :show
   end
 
   # GET /articles/new

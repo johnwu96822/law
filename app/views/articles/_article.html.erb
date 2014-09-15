@@ -3,10 +3,15 @@
   <% if children.length > 0 %>
     <a href="javascript:void(0)" onclick="showChildren(<%= article.id %>)">
       <span>
-        <i id="icon_<%= article.id %>" class="icon-plus"></i><%= article.content %>
+        <i id="icon_<%= article.id %>" class="icon-<%= params[:action] == 'all' ? 'minus': 'plus' %>"></i><%= article.content %>
       </span>
     </a>
     | <%= link_to 'View', article %>
+    <% if params[:action] == 'all' %>
+      <ul class="tree" id="a_children_<%= article.id %>">
+        <%= render children %>
+      </ul>
+    <% end %>
   <% else %>
     <span>
       <%= article.content %> |
