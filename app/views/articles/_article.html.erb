@@ -6,9 +6,11 @@
         <i id="icon_<%= article.id %>" class="icon-plus"></i><%= article.content %>
       </span>
     </a>
+    | <%= link_to 'View', article %>
   <% else %>
     <span>
-      <%= article.content %>
+      <%= article.content %> |
+      <%= link_to 'View', article %>
     </span>
   <% end %>
 </li>

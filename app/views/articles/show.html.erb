@@ -1,4 +1,12 @@
 <p id="notice"><%= notice %></p>
-<%= render 'root', _article: @article %>
+<div>
+  <%= @article.content %>
+  <% children = @article.children.order('priority ASC') %>
+  <% if children.length > 0 %>
+    <ul class="tree">
+      <%= render children %>
+    </ul>
+  <% end %>
+</div>
 <%= link_to 'Edit', edit_article_path(@article) %> |
 <%= link_to 'Back', articles_path %>

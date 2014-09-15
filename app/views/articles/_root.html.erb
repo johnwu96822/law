@@ -1,5 +1,6 @@
 <div>
-  <%= _article.content %>
+  <%= _article.content %> |
+  <%= link_to 'View', _article %>
   <% children = _article.children.order('priority ASC') %>
   <% if children.length > 0 %>
     <ul class="tree">
