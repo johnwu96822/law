@@ -30,16 +30,12 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = Article.new
-    @for_select = Article.all.collect{|ar| 
-        ["#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}", 
-        "#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}"]}
+    articles_for_select
   end
 
   # GET /articles/1/edit
   def edit
-    @for_select = Article.where("NOT id = #{@article.id}").all.collect{|ar| 
-        ["#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}", 
-        "#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}"]}
+    articles_for_select(@article.id)
   end
 
   # POST /articles
@@ -53,10 +49,8 @@ class ArticlesController < ApplicationController
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
       else
-        format.html { 
-          @for_select = Article.all.collect{|ar| 
-            ["#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}", 
-            "#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}"]}
+        format.html {
+          articles_for_select()
           render :new }
         format.json { render json: @article.errors, status: :unprocessable_entity }
       end
@@ -72,10 +66,8 @@ class ArticlesController < ApplicationController
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
       else
-        format.html { 
-          @for_select = Article.where("NOT id = #{@article.id}").all.collect{|ar| 
-            ["#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}", 
-            "#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}"]}
+        format.html {
+          articles_for_select(@article.id)
           render :edit }
         format.json { render json: @article.errors, status: :unprocessable_entity }
       end
@@ -101,6 +93,18 @@ class ArticlesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params.require(:article).permit(:content, :ancestry, :priority)
+    end
+    
+    def articles_for_select(id = nil)
+      if id
+        @for_select = Article.where("NOT id = #{id}").all.collect{|ar| 
+          ["#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}:#{ar.content[0..10]}", 
+          "#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}"]}
+      else
+        @for_select = Article.all.collect{|ar| 
+          ["#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}:#{ar.content[0..10]}", 
+          "#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}"]}
+      end
     end
     
 end
