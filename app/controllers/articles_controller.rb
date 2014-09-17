@@ -36,6 +36,11 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = Article.new
+    if params[:par]
+      parent = Article.find(params[:par])
+      @article.priority = parent.children.size
+      @article.parent = parent
+    end
     articles_for_select
   end
 
@@ -52,7 +57,7 @@ class ArticlesController < ApplicationController
     @article.ancestry = nil if @article.ancestry.blank?
     respond_to do |format|
       if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
+        format.html { redirect_to all_article_path(@article.root), notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
       else
         format.html {
@@ -69,7 +74,7 @@ class ArticlesController < ApplicationController
     params[:article][:ancestry] = nil if params[:article][:ancestry].blank?
     respond_to do |format|
       if @article.update(article_params)
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
+        format.html { redirect_to all_article_path(@article.root), notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
       else
         format.html {
@@ -103,11 +108,11 @@ class ArticlesController < ApplicationController
     
     def articles_for_select(id = nil)
       if id
-        @for_select = Article.where("NOT id = #{id}").all.collect{|ar| 
+        @for_select = Article.order(:ancestry).where("NOT id = #{id}").all.collect{|ar| 
           ["#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}:#{ar.content[0..10]}", 
           "#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}"]}
       else
-        @for_select = Article.all.collect{|ar| 
+        @for_select = Article.order(:ancestry).all.collect{|ar| 
           ["#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}:#{ar.content[0..10]}", 
           "#{ar.ancestry.blank? ? '' : ar.ancestry + '/'}#{ar.id}"]}
       end

@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 <div>
   <%= @article.content %>
+  <%= render 'menu', _article: @article %>
   <% children = @article.children.order('priority ASC') %>
   <% if children.length > 0 %>
     <ul class="tree">

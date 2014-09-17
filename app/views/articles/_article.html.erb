@@ -6,7 +6,7 @@
         <i id="icon_<%= article.id %>" class="icon-<%= params[:action] == 'all' ? 'minus': 'plus' %>"></i><%= article.content %>
       </span>
     </a>
-    | <%= link_to 'View', article %>
+    <%= render 'menu', _article: article %>
     <% if params[:action] == 'all' %>
       <ul class="tree" id="a_children_<%= article.id %>">
         <%= render children %>
@@ -14,8 +14,8 @@
     <% end %>
   <% else %>
     <span>
-      <%= article.content %> |
-      <%= link_to 'View', article %>
+      <%= article.content %>
+      <%= render 'menu', _article: article %>
     </span>
   <% end %>
 </li>

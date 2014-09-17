@@ -1,0 +1,9 @@
+<div class="dropdown" style="display:inline-block">
+  <a data-toggle="dropdown" href="#">v</a>
+  <ul class="dropdown-menu" role="menu">
+    <li><%= link_to '編輯', edit_article_path(_article) %></li>
+    <li><%= link_to '進入', _article %></li>
+    <li><%= link_to '刪除', _article, method: :delete %></li>
+    <li><%= link_to '新增下層條文', new_article_path(par: _article.id) %></li>
+  </ul>
+</div>

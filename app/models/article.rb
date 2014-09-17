@@ -14,5 +14,7 @@ class Article < ActiveRecord::Base
   include Ownnable
   # Ancestry would not allow empty string "" as ancestry field.
   # ancestry needs to be nil for root nodes
-  acts_as_tree
+  has_ancestry orphan_strategy: :adopt
+  
+  validates :content, presence: true
 end

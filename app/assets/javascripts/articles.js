@@ -16,7 +16,7 @@ function showChildren(id) {
 
 function createSubtree(id, data) {
   if (data.children) {
-      var html = $('<ul>').attr('id', 'a_children_' + id);
+      var html = $('<ul>').attr('id', 'a_children_' + id).addClass('tree');
       for (var i = 0; i < data.children.length; i++) {
         article = data.children[i];
         var ele = $('<li>').attr('id', 'article_' + article.id);
