@@ -1,0 +1,6 @@
+if ($('#content_<%= @article.id %>').val() != "<%= @article.content.html_safe %>") {
+  alert("更新失敗, 網頁將重新載入");
+  window.location.reload();
+} else {
+  $("#success_<%= @article.id %>").show().fadeOut(1000);
+}

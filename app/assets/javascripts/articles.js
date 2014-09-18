@@ -32,3 +32,24 @@ function createSubtree(id, data) {
       $('#article_' + id).append(html);
     }
 }
+
+$(document).ready(function() {
+  $('.to_edit').click(function() {
+    $(this).hide().next('.editing_form').css('display', 'inline-block').children('.editing').focus();
+  });
+  
+  $('.editing').blur(function() {
+    var _this = $(this);
+    var to_edit = _this.parent().hide().prev('.to_edit').show();
+    if (to_edit.text() != _this.val()) {
+      _this.parent().submit();
+      to_edit.text(_this.val());
+    }
+  });
+  
+  $('.editing').keypress(function(event) {
+    if (event.which == 13) {
+      $(this).blur();
+    }
+  });
+});

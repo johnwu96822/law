@@ -1,5 +1,5 @@
 <div>
-  <%= _article.content %>
+  <%= render 'click_edit_form', _article: _article %>
   <%= render 'menu', _article: _article %>
   <% children = _article.children.order('priority ASC') %>
   <% if children.length > 0 %>

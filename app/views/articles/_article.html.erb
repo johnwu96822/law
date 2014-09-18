@@ -2,19 +2,18 @@
   <% children = article.children %>
   <% if children.length > 0 %>
     <a href="javascript:void(0)" onclick="showChildren(<%= article.id %>)">
-      <span>
-        <i id="icon_<%= article.id %>" class="icon-<%= params[:action] == 'all' ? 'minus': 'plus' %>"></i><%= article.content %>
-      </span>
+      <i id="icon_<%= article.id %>" class="icon-<%= params[:action] != 'show' ? 'minus': 'plus' %>"></i>
     </a>
+    <%= render 'click_edit_form', _article: article %>
     <%= render 'menu', _article: article %>
-    <% if params[:action] == 'all' %>
+    <% if params[:action] != 'show' %>
       <ul class="tree" id="a_children_<%= article.id %>">
         <%= render children %>
       </ul>
     <% end %>
   <% else %>
     <span>
-      <%= article.content %>
+      <%= render 'click_edit_form', _article: article %>
       <%= render 'menu', _article: article %>
     </span>
   <% end %>

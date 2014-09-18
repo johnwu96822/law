@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <div>
-  <%= @article.content %>
+  <%= render 'click_edit_form', _article: @article %>
   <%= render 'menu', _article: @article %>
   <% children = @article.children.order('priority ASC') %>
   <% if children.length > 0 %>

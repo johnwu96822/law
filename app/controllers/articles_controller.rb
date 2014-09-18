@@ -75,6 +75,7 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to all_article_path(@article.root), notice: 'Article was successfully updated.' }
+        format.js {}
         format.json { render :show, status: :ok, location: @article }
       else
         format.html {

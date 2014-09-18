@@ -40,3 +40,13 @@
 .icon-minus {
   background: url("/images/minus.svg") no-repeat;
 }
+.editing_form {
+  display:none;
+}
+.a_success {
+  display:none;
+  color:green;
+}
+.to_edit {
+  cursor:pointer;
+}

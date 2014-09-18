@@ -1,0 +1,9 @@
+<span class="to_edit" aid="<%= _article.id %>"><%= _article.content %></span>
+<%= form_for _article, remote: true, 
+    html: {:class => 'editing_form'} do |f| %>
+  <%= f.hidden_field :ancestry %>
+  <%= f.hidden_field :priority %>
+  <%= f.text_field :content, id: "content_#{_article.id}",
+      :class => 'editing', aid: _article.id %>
+<% end %>
+<span class="a_success" id="success_<%= _article.id %>">更改成功</span>
