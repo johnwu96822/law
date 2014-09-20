@@ -14,3 +14,17 @@
 //= require jquery_ujs
 // require turbolinks
 //= require articles
+//= require angular/angular
+//= require angular/angular-route
+//= require controller
+var lawApp = angular.module('lawApp', ['ngRoute', 'controllers']);
+lawApp.config(['$routeProvider', function($routeProvider) {
+  $routeProvider.
+    when('/tree', {
+      templateUrl: '/views/tree.html',
+      controller: 'ArticleTreeCtrl'
+    }).
+    otherwise({
+      redirectTo: '/tree'
+    });
+}]);

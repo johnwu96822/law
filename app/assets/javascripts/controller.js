@@ -1,5 +1,5 @@
-var lawApp = angular.module('lawApp', []);
+var controllers = angular.module('controllers', []);
 
-lawApp.controller('ArticleTreeCtrl', function($scope, $http) {
+controllers.controller('ArticleTreeCtrl', ['$scope', function($scope) {
   
-});
+}]);
