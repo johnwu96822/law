@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
+  # You can have the root of your site routed with "root"
+  root 'articles#index' #'pages#home'
+  match 'home' => 'pages#home', via: :get
   resources :articles do
     member do
       get :children
       get :all
     end
   end
-
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  root 'articles#index' #'pages#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
