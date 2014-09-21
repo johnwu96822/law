@@ -1,4 +1,4 @@
-<span class="to_edit" aid="<%= _article.id %>"><%= _article.content %></span>
+<span class="to_edit" aid="<%= _article.id %>"><%= _article.content.html_safe %></span>
 <%= form_for _article, remote: true, 
     html: {:class => 'editing_form'} do |f| %>
   <%= f.hidden_field :ancestry %>

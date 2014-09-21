@@ -1,3 +1,13 @@
+<%= content_for :head do %>
+  <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+  <script type="text/javascript">
+    tinymce.init({
+        selector: "textarea.html_editor",
+        statusbar: false,
+        forced_root_block: false
+    });
+  </script>
+<% end %>
 <%= form_for(@article) do |f| %>
   <% if @article.errors.any? %>
     <div id="error_explanation">
@@ -13,7 +23,7 @@
 
   <div class="field">
     <%= f.label :content %><br>
-    <%= f.text_area :content %>
+    <%= f.text_area :content, :class => 'html_editor' %>
   </div>
   <div class="field">
     <%= f.label :ancestry %><br>
