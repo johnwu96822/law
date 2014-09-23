@@ -18,5 +18,5 @@ class Article < ActiveRecord::Base
   # ancestry needs to be nil for root nodes
   has_ancestry orphan_strategy: :adopt
   
-  validates :content, presence: true, length: {maximum: 500}
+  validates :content, presence: true
 end
