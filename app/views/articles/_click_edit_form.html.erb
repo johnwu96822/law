@@ -4,6 +4,6 @@
   <%= f.hidden_field :ancestry %>
   <%= f.hidden_field :priority %>
   <%= f.text_field :content, id: "content_#{_article.id}",
-      :class => 'editing', aid: _article.id, size:80, maxlength:255 %>
+      :class => 'editing', aid: _article.id, size:80 %>
 <% end %>
 <span class="a_success" id="success_<%= _article.id %>">更改成功</span>
