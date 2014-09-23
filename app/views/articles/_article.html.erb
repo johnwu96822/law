@@ -1,5 +1,5 @@
 <li id="article_<%= article.id %>">
-  <% children = article.children %>
+  <% children = article.children.order(:priority) %>
   <% if children.length > 0 %>
     <a href="javascript:void(0)" onclick="showChildren(<%= article.id %>)">
       <i id="icon_<%= article.id %>" class="icon-<%= params[:action] != 'show' ? 'minus': 'plus' %>"></i>

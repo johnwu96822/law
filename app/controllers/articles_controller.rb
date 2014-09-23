@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
   # end 
   
   def children
-    children = @article.children.order("priority ASC")
+    children = @article.children.order(:priority)
     temp = []
     children.each do |child|
       temp << {id: child.id, content: child.content,
@@ -24,7 +24,7 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     #@articles = Article.all
-    @articles = Article.roots
+    @articles = Article.roots.order(:priority)
   end
 
   # GET /articles/1

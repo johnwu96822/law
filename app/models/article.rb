@@ -3,12 +3,14 @@
 # Table name: articles
 #
 #  id         :integer          not null, primary key
-#  content    :string(255)
+#  content    :text
 #  ancestry   :string(255)
-#  priority   :integer
+#  priority   :integer          default(0)
+#  user_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
 #
+
 
 class Article < ActiveRecord::Base
   include Ownnable

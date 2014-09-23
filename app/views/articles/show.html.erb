@@ -1,4 +1,4 @@
-<div>
+<div class="tree">
   <%= render 'click_edit_form', _article: @article %>
   <%= render 'menu', _article: @article %>
   <% children = @article.children.order('priority ASC') %>

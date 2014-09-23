@@ -41,9 +41,9 @@ $(document).ready(function() {
   $('.editing').blur(function() {
     var _this = $(this);
     var to_edit = _this.parent().hide().prev('.to_edit').show();
-    if (to_edit.text() != _this.val()) {
+    if (to_edit.html() != _this.val()) {
       _this.parent().submit();
-      to_edit.text(_this.val());
+      to_edit.html(_this.val());
     }
   });
   
