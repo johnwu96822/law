@@ -1,1 +1,16 @@
-<div ng-view></div>
+<div ng-controller="ArticleTreeCtrl">
+  <div ng-view></div>
+  <ul>
+    <% @articles.each do |article| %>
+      <li>
+        <span><%= article.content %></span>
+        <article-tree pid="<%= article.id %>"></article-tree>
+      </li>
+    <% end %>
+    <!-- <li ng-repeat="article in articles">
+      <span>{{article.content}}</span>
+      <article-tree pid="article.id"></article-tree>
+    </li> -->
+  </ul>
+</div>
+<%= link_to root_path %>

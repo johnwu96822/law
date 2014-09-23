@@ -7,6 +7,9 @@ Rails.application.routes.draw do
       get :children
       get :all
     end
+    collection do
+      get :roots
+    end
   end
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

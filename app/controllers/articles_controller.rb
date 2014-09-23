@@ -11,9 +11,13 @@ class ArticlesController < ApplicationController
     temp = []
     children.each do |child|
       temp << {id: child.id, content: child.content,
-          has_children: child.has_children?}
+          has_children: child.has_children?, child_ids: child.child_ids}
     end
     render json: {children: temp}
+  end
+  
+  def roots
+    render json: {articles: Article.roots}
   end
 
   # GET /articles
@@ -26,6 +30,10 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    respond_to do |format|
+      format.html {}
+      format.json {}
+    end
   end
   
   # GET /articles/1/all

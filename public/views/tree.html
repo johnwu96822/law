@@ -1,1 +1,10 @@
-<div>Hello Tree</div>
+<ul aid="{{pid}}" class="tree">
+  <li ng-repeat="article in children" id="article_{{article.id}}">
+    <span class="to_edit">{{article.content}}</span>
+    <span ng-show="has_children_{{article.id}}">
+      <a href="#" ng-hide="isOpen_{{article.id}}" ng-click="show_children(article.id);" id="open_{{article.id}}">Open</a>
+      <a href="#" ng-show="isOpen_{{article.id}}" ng-click="hide_children(article.id);" id="hide_{{article.id}}">Hide</a>
+      <div id="subtree_{{article.id}}" ng-show="isOpen_{{article.id}}"></div>
+    </span>
+  </li>
+</ul>
