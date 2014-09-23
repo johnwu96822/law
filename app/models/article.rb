@@ -3,7 +3,7 @@
 # Table name: articles
 #
 #  id         :integer          not null, primary key
-#  content    :string(500)
+#  content    :text
 #  ancestry   :string(255)
 #  priority   :integer          default(0)
 #  user_id    :integer
@@ -18,5 +18,5 @@ class Article < ActiveRecord::Base
   # ancestry needs to be nil for root nodes
   has_ancestry orphan_strategy: :adopt
   
-  validates :content, presence: true, length: {maximum: 255}
+  validates :content, presence: true, length: {maximum: 500}
 end
