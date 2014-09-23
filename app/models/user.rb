@@ -6,6 +6,8 @@
 #  first_name             :string(50)
 #  last_name              :string(50)
 #  username               :string(50)       not null
+#  plan                   :string(1)
+#  status                 :string(1)
 #  email                  :string(255)      default(""), not null
 #  encrypted_password     :string(255)      default(""), not null
 #  reset_password_token   :string(255)
